@@ -3,371 +3,135 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Udhëtim nëpër qytetërimet dhe monarkitë e Mesjetës.">
-  <title>Gjurmë Mesjetare | Historia në udhëtim</title>
-
+  <meta name="description" content="Udhëzues interaktiv në shqip për qytetërimet dhe monarkitë mesjetare, me 36 pyetje, fjalor, kartela dhe vijë kohore.">
+  <meta name="theme-color" content="#f6efdf">
+  <title>Gjurmë Mesjetare | Monarkitë dhe Qytetërimet</title>
   <style>
-    :root {
-      --paper: #fbf5e8;
-      --paper-deep: #f0e2c6;
-      --ink: #30251d;
-      --muted: #6f6256;
-      --red: #8e3f31;
-      --red-dark: #6f2e25;
-      --gold: #bd8c3d;
-      --green: #526d50;
-      --line: #dfcfad;
-      --white: #fffdf8;
-      --shadow: 0 12px 30px rgba(76, 52, 27, .12);
-    }
-
-    * { box-sizing: border-box; scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      color: var(--ink);
-      background:
-        radial-gradient(ellipse at 10% 12%, rgba(189,140,61,.10), transparent 28rem),
-        radial-gradient(ellipse at 90% 30%, rgba(142,63,49,.07), transparent 30rem),
-        var(--paper);
-      font-family: Georgia, "Times New Roman", serif;
-      line-height: 1.7;
-    }
-
-    img { max-width: 100%; }
-    button, input { font: inherit; }
-    a { color: var(--red-dark); }
-
-    .topbar {
-      position: sticky;
-      top: 0;
-      z-index: 20;
-      background: rgba(251,245,232,.96);
-      border-bottom: 1px solid var(--line);
-      backdrop-filter: blur(10px);
-    }
-
-    .nav-wrap {
-      max-width: 1200px;
-      margin: auto;
-      padding: .7rem 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: .8rem;
-    }
-
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: .55rem;
-      color: var(--red-dark);
-      font-size: 1.05rem;
-      font-weight: bold;
-      text-decoration: none;
-      white-space: nowrap;
-    }
-
-    .brand-icon { font-size: 1.5rem; }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      gap: .1rem;
-    }
-
-    nav a {
-      color: var(--muted);
-      padding: .4rem .55rem;
-      border-radius: 999px;
-      text-decoration: none;
-      font: 600 .78rem Arial, sans-serif;
-    }
-
-    nav a:hover, nav a:focus {
-      color: var(--red-dark);
-      background: var(--paper-deep);
-    }
-
-    .hero {
-      max-width: 1200px;
-      min-height: 520px;
-      margin: auto;
-      padding: 4.5rem 1rem 3.5rem;
-      display: grid;
-      grid-template-columns: 1.05fr .95fr;
-      align-items: center;
-      gap: 2rem;
-    }
-
-    .eyebrow {
-      color: var(--red);
-      font: bold .76rem Arial, sans-serif;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-
-    h1, h2, h3 { line-height: 1.2; }
-    h1 {
-      max-width: 700px;
-      margin: .7rem 0 1rem;
-      font-size: clamp(2.7rem, 7vw, 5.3rem);
-    }
-
-    h1 span { color: var(--red); }
-    .hero p { max-width: 650px; color: var(--muted); font-size: 1.1rem; }
-
-    .hero-image {
-      position: relative;
-      overflow: hidden;
-      min-height: 330px;
-      border: 8px solid var(--white);
-      outline: 1px solid var(--line);
-      border-radius: 48% 48% 14px 14px;
-      box-shadow: var(--shadow);
-      animation: float 5s ease-in-out infinite;
-    }
-
-    .hero-image img {
-      width: 100%;
-      height: 100%;
-      min-height: 330px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .image-caption {
-      position: absolute;
-      right: 12px;
-      bottom: 12px;
-      padding: .35rem .65rem;
-      border-radius: 4px;
-      color: white;
-      background: rgba(48,37,29,.78);
-      font-size: .78rem;
-    }
-
-    .hero-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.4rem; }
-
-    .button {
-      display: inline-block;
-      padding: .68rem .95rem;
-      border: 1px solid var(--red);
-      border-radius: 5px;
-      background: var(--red);
-      color: white;
-      text-decoration: none;
-      font: bold .88rem Arial, sans-serif;
-      cursor: pointer;
-      transition: transform .2s, background .2s;
-    }
-
-    .button:hover { transform: translateY(-2px); background: var(--red-dark); }
-    .button.light { background: transparent; color: var(--red-dark); }
-    .button.gold { border-color: var(--gold); background: var(--gold); color: #241a10; }
-
-    main { max-width: 1200px; margin: auto; padding: 0 1rem 4rem; }
-    section { padding: 3.7rem 0 .4rem; scroll-margin-top: 85px; }
-
-    .section-head { max-width: 760px; margin-bottom: 1.5rem; }
-    .section-head h2 { margin: .4rem 0 .55rem; font-size: clamp(2rem, 4vw, 3rem); }
-    .section-head p { margin: 0; color: var(--muted); }
-
-    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
-
-    .card, .quiz, .glossary-item, .source-box, .timeline-card, .compare-wrap, .qr-box {
-      border: 1px solid var(--line);
-      border-radius: 9px;
-      background: rgba(255,253,248,.88);
-      box-shadow: var(--shadow);
-    }
-
-    .card {
-      padding: 1.25rem;
-      transition: transform .25s, box-shadow .25s;
-    }
-
-    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(76,52,27,.16); }
-    .card h3 { margin: .1rem 0 .5rem; color: var(--red-dark); font-size: 1.25rem; }
-    .card p, .card li { color: var(--muted); }
-    .card p:last-child { margin-bottom: 0; }
-    .card ul { padding-left: 1.2rem; }
-
-    .tag {
-      display: inline-block;
-      margin-bottom: .45rem;
-      color: var(--green);
-      font: bold .72rem Arial, sans-serif;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-    }
-
-    .section-image {
-      width: 100%;
-      height: 220px;
-      margin-bottom: .9rem;
-      border-radius: 6px;
-      object-fit: cover;
-      display: block;
-    }
-
-    .note {
-      margin-top: 1rem;
-      padding: .9rem 1rem;
-      border-left: 4px solid var(--gold);
-      border-radius: 4px;
-      background: #f5ebd6;
-      color: var(--muted);
-    }
-
-    .timeline {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: .9rem;
-    }
-
-    .timeline-card { padding: 1rem; }
-    .timeline-card strong { display: block; color: var(--red); font-size: 1.25rem; }
-    .timeline-card p { margin: .3rem 0 0; color: var(--muted); }
-
-    .quiz { margin-top: 1.1rem; padding: 1.2rem; }
-    .quiz h3 { margin: 0 0 .6rem; color: var(--red-dark); }
-    .question { padding: .7rem 0; border-top: 1px solid var(--line); }
-    .question:first-of-type { border-top: 0; }
-    .question p { margin: .1rem 0 .5rem; font-weight: bold; }
-    .question label { display: block; padding: .25rem .25rem; color: var(--muted); cursor: pointer; }
-    .question label:hover { color: var(--red-dark); }
-    .question input { accent-color: var(--red); margin-right: .4rem; }
-    .quiz button {
-      margin-top: .65rem;
-      padding: .6rem .9rem;
-      border: 0;
-      border-radius: 5px;
-      background: var(--green);
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .quiz button:hover { filter: brightness(.92); }
-    .feedback { min-height: 1.5rem; margin: .6rem 0 0; font-weight: bold; }
-    .feedback.success { color: #356442; }
-    .feedback.error { color: #a53d2b; }
-
-    .compare-wrap { overflow-x: auto; }
-    table { width: 100%; border-collapse: collapse; min-width: 590px; }
-    th, td { padding: .9rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
-    th { color: var(--red-dark); background: #f5ebd6; }
-    td { color: var(--muted); }
-    tr:last-child td { border-bottom: 0; }
-
-    .glossary-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .8rem; }
-    .glossary-item { padding: .9rem; }
-    .glossary-item dt { color: var(--red-dark); font-weight: bold; }
-    .glossary-item dd { margin: .2rem 0 0; color: var(--muted); }
-
-    .qr-layout { display: grid; grid-template-columns: 1fr 240px; gap: 1rem; align-items: center; }
-    .qr-box { padding: 1rem; text-align: center; }
-    #qrImage { width: 180px; height: 180px; display: block; margin: .4rem auto; }
-    .small { color: var(--muted); font-size: .9rem; }
-    .source-box { padding: 1.2rem; }
-    .source-box p { color: var(--muted); margin: .35rem 0; }
-    .source-box strong { color: var(--red-dark); }
-
-    footer {
-      padding: 1.5rem 1rem;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      text-align: center;
-    }
-
-    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
-    .reveal.visible { opacity: 1; transform: translateY(0); }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-
-    @media (max-width: 850px) {
-      .nav-wrap { align-items: flex-start; flex-direction: column; }
-      nav { justify-content: flex-start; }
-      .hero { grid-template-columns: 1fr; padding-top: 3rem; }
-      .hero-image { max-width: 600px; width: 100%; margin: auto; }
-      .timeline { grid-template-columns: repeat(2,1fr); }
-      .glossary-grid { grid-template-columns: repeat(2,1fr); }
-    }
-
-    @media (max-width: 560px) {
-      nav a { padding: .35rem .42rem; font-size: .72rem; }
-      .grid, .timeline, .glossary-grid, .qr-layout { grid-template-columns: 1fr; }
-      .hero-image { min-height: 250px; }
-      .hero-image img { min-height: 250px; }
-      section { padding-top: 2.8rem; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      *, *::before, *::after {
-        scroll-behavior: auto !important;
-        animation-duration: .01ms !important;
-        transition-duration: .01ms !important;
-      }
-    }
-
-    @media print {
-      body { background: white; color: #222; font-size: 11pt; }
-      .topbar, .hero-actions, .quiz button, .feedback, .qr-box, footer { display: none !important; }
-      .hero { min-height: auto; padding: 1rem 0; display: block; }
-      .hero-image { display: none; }
-      main { max-width: none; padding: 0; }
-      section { padding: 1rem 0; break-inside: avoid; }
-      .card, .quiz, .glossary-item, .source-box, .timeline-card, .compare-wrap {
-        box-shadow: none;
-        background: white;
-        break-inside: avoid;
-      }
-      .grid { gap: .5rem; }
-      .section-image { height: 130px; }
-      a { color: #222; text-decoration: none; }
-      .reveal { opacity: 1; transform: none; }
-    }
+    :root{--paper:#fbf6e9;--cream:#fffdf7;--parchment:#efe2c7;--ink:#30251d;--muted:#6d6256;--red:#873d30;--red-dark:#672d24;--gold:#bd8c3d;--green:#506b4e;--line:#dfcfad;--shadow:0 12px 30px rgba(76,52,27,.11)}
+    *{box-sizing:border-box;scroll-behavior:smooth} body{margin:0;background:radial-gradient(ellipse at 9% 8%,#bd8c3d16,transparent 28rem),radial-gradient(ellipse at 90% 25%,#873d3010,transparent 30rem),var(--paper);color:var(--ink);font:16px/1.72 Georgia,"Times New Roman",serif} img{max-width:100%} button,input{font:inherit} a{color:var(--red-dark)}
+    .topbar{position:sticky;top:0;z-index:10;background:#fbf6e9f2;border-bottom:1px solid var(--line);backdrop-filter:blur(10px)}.nav-wrap{max-width:1200px;margin:auto;padding:.65rem 1rem;display:flex;align-items:center;justify-content:space-between;gap:.7rem}.brand{color:var(--red-dark);font-weight:bold;text-decoration:none;white-space:nowrap;font-size:1.04rem}.brand span{font-size:1.35rem;margin-right:.35rem}nav{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:.15rem}nav a{font:600 .76rem Arial,sans-serif;color:var(--muted);padding:.38rem .5rem;border-radius:20px;text-decoration:none}nav a:hover,nav a:focus{background:var(--parchment);color:var(--red-dark)}
+    .hero,main{max-width:1200px;margin:auto;padding-left:1rem;padding-right:1rem}.hero{min-height:495px;padding-top:3.5rem;padding-bottom:3rem;display:grid;grid-template-columns:1.05fr .95fr;align-items:center;gap:2rem}.eyebrow,.tag{font:bold .74rem Arial,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}h1,h2,h3{line-height:1.2}h1{font-size:clamp(2.7rem,7vw,5.1rem);margin:.65rem 0}h1 span{color:var(--red)}.hero p{color:var(--muted);max-width:650px;font-size:1.08rem}.hero-image{height:340px;overflow:hidden;border:8px solid var(--cream);outline:1px solid var(--line);border-radius:48% 48% 12px 12px;box-shadow:var(--shadow);animation:float 5s ease-in-out infinite;position:relative}.hero-image img{width:100%;height:100%;object-fit:cover}.caption{position:absolute;bottom:12px;right:12px;background:#30251dcc;color:white;border-radius:4px;padding:.3rem .6rem;font-size:.8rem}.actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:1.2rem 0}.btn{display:inline-block;border:1px solid var(--red);background:var(--red);color:white;text-decoration:none;padding:.62rem .9rem;border-radius:5px;font:bold .87rem Arial,sans-serif;cursor:pointer}.btn:hover{background:var(--red-dark);transform:translateY(-1px)}.btn.gold{background:var(--gold);border-color:var(--gold);color:#241a10}.btn.light{background:transparent;color:var(--red-dark)}.small{font: .88rem/1.55 Arial,sans-serif;color:var(--muted)}
+    main{padding-bottom:4rem}section{padding:3.3rem 0 .4rem;scroll-margin-top:85px}.section-head{max-width:780px;margin-bottom:1.35rem}.section-head h2{font-size:clamp(2rem,4vw,2.9rem);margin:.35rem 0}.section-head p{color:var(--muted);margin:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1rem}.card,.quiz,.flashcard,.timeline-item,.glossary-item,.source,.qr-box,.compare{background:#fffdf7e8;border:1px solid var(--line);border-radius:8px;box-shadow:var(--shadow)}.card{padding:1.2rem;transition:transform .22s,box-shadow .22s}.card:hover{transform:translateY(-3px);box-shadow:0 16px 34px #4c341b25}.card h3{margin:.12rem 0 .5rem;color:var(--red-dark);font-size:1.23rem}.card p,.card li{color:var(--muted)}.card p:last-child{margin-bottom:0}.tag{color:var(--green);font-size:.68rem;letter-spacing:.1em}.photo{width:100%;height:205px;object-fit:cover;border-radius:5px;margin-bottom:.8rem}.note{margin-top:1rem;padding:.85rem 1rem;background:#f4ead5;border-left:4px solid var(--gold);color:var(--muted)}
+    .timeline{display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem}.timeline-item{padding:1rem}.timeline-item strong{display:block;color:var(--red);font-size:1.25rem}.timeline-item p{margin:.2rem 0 0;color:var(--muted)}.compare{overflow:auto}table{width:100%;border-collapse:collapse;min-width:580px}th,td{text-align:left;vertical-align:top;padding:.85rem;border-bottom:1px solid var(--line)}th{background:#f4ead5;color:var(--red-dark)}td{color:var(--muted)}tr:last-child td{border-bottom:0}
+    .quiz-tools{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-bottom:1rem}.quiz-tools select,.quiz-tools input{padding:.55rem .65rem;border:1px solid var(--line);border-radius:5px;background:var(--cream);color:var(--ink)}.quiz{padding:1rem;margin:.75rem 0}.quiz-top{display:flex;justify-content:space-between;gap:.5rem;align-items:flex-start}.quiz h3{font-size:1rem;margin:.15rem 0 .5rem;color:var(--red-dark)}.q-type{font:bold .68rem Arial,sans-serif;color:var(--green);white-space:nowrap}.quiz p{margin:.35rem 0}.quiz label{display:block;padding:.22rem .2rem;color:var(--muted);cursor:pointer}.quiz input[type=radio]{accent-color:var(--red);margin-right:.4rem}.short-answer{width:100%;max-width:500px;padding:.55rem;border:1px solid var(--line);border-radius:5px;background:#fff}.answer-feedback{min-height:1.3rem;font:bold .9rem Arial,sans-serif}.answer-feedback.ok{color:#356442}.answer-feedback.no{color:#a53d2b}.score{position:sticky;top:84px;z-index:4;padding:.7rem 1rem;background:#f1e4c9;border:1px solid var(--line);border-radius:6px;color:var(--red-dark);font:bold 1rem Arial,sans-serif}.quiz-actions{display:flex;gap:.6rem;flex-wrap:wrap;margin:.8rem 0}.quiz-actions button{border:0;border-radius:5px;padding:.65rem .9rem;background:var(--green);color:white;font-weight:bold;cursor:pointer}.quiz-actions .reset{background:#756452}
+    .glossary-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}.glossary-item{padding:.85rem}.glossary-item dt{font-weight:bold;color:var(--red-dark)}.glossary-item dd{margin:.18rem 0 0;color:var(--muted)}.flash-area{display:grid;grid-template-columns:1fr auto 1fr;gap:.7rem;align-items:center}.flashcard{min-height:190px;padding:1.3rem;display:grid;place-items:center;text-align:center;cursor:pointer;transition:transform .25s}.flashcard:hover{transform:rotateY(3deg)}.flashcard h3{color:var(--red-dark);font-size:1.5rem}.flashcard p{color:var(--muted)}.flash-controls{display:flex;justify-content:center;gap:.6rem;margin-top:.8rem}.flash-controls button{border:0;border-radius:5px;padding:.6rem .9rem;background:var(--green);color:white;font-weight:bold;cursor:pointer}.flash-controls button:disabled{opacity:.5}.source{padding:1.1rem}.source p{margin:.3rem 0;color:var(--muted)}.source strong{color:var(--red-dark)}.qr-layout{display:grid;grid-template-columns:1fr 250px;gap:1rem;align-items:center}.qr-box{text-align:center;padding:1rem}.qr-box img{display:block;width:180px;height:180px;margin:.4rem auto}.reveal{opacity:0;transform:translateY(15px);transition:opacity .55s,transform .55s}.reveal.visible{opacity:1;transform:none}footer{text-align:center;padding:1.3rem;border-top:1px solid var(--line);color:var(--muted)}
+    @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+    @media(max-width:850px){.nav-wrap{align-items:flex-start;flex-direction:column}nav{justify-content:flex-start}.hero{grid-template-columns:1fr;padding-top:2.5rem}.hero-image{max-width:600px;width:100%;margin:auto}.timeline{grid-template-columns:repeat(2,1fr)}.glossary-grid{grid-template-columns:repeat(2,1fr)}}
+    @media(max-width:560px){nav a{font-size:.7rem;padding:.32rem .4rem}.grid,.timeline,.glossary-grid,.qr-layout{grid-template-columns:1fr}.hero-image{height:250px}.flash-area{grid-template-columns:1fr}.flashcard{min-height:155px}section{padding-top:2.7rem}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
+    @media print{body{background:white;color:#222;font-size:10pt}.topbar,.actions,.quiz-tools,.quiz-actions,.flash-controls,.qr-box,footer,.small{display:none!important}.hero{display:block;min-height:0;padding:1rem 0}.hero-image{display:none}main{max-width:none;padding:0}section{padding:1rem 0;break-inside:auto}.card,.quiz,.flashcard,.timeline-item,.glossary-item,.source,.compare{box-shadow:none;background:white;break-inside:avoid}.reveal{opacity:1;transform:none}.answer-feedback{display:none}.score{position:static}.grid{gap:.4rem}.photo{height:120px}a{color:#222;text-decoration:none}}
   </style>
 </head>
-
 <body>
-  <header class="topbar">
-    <div class="nav-wrap">
-      <a class="brand" href="#kryefaqja"><span class="brand-icon">♜</span> Gjurmë Mesjetare</a>
-      <nav aria-label="Menyja kryesore">
-        <a href="#vija-kohore">Kohorja</a>
-        <a href="#tranzicioni">Tranzicioni</a>
-        <a href="#arab">Arabët</a>
-        <a href="#romake">Perandoria Romake</a>
-        <a href="#angli">Anglia</a>
-        <a href="#france">Franca</a>
-        <a href="#kryqezatat">Kryqëzatat</a>
-        <a href="#osmane">Osmanët</a>
-        <a href="#fjalori">Fjalori</a>
-        <a href="#burimet">Burimet</a>
-      </nav>
-    </div>
-  </header>
-
-  <header class="hero" id="kryefaqja">
-    <div class="reveal">
-      <div class="eyebrow">Histori · Qytetërime · Mesjetë</div>
-      <h1>Udhëto nëpër <span>Mesjetë</span></h1>
-      <p>
-        Zbulo qytetërimet dhe monarkitë që formësuan historinë. Lexo temat,
-        ndiq vijën kohore, provo kuizet dhe përdore faqen si shënime mësimore.
-      </p>
-      <div class="hero-actions">
-        <a class="button" href="#vija-kohore">Fillo udhëtimin</a>
-        <button class="button gold" type="button" onclick="window.print()">Ruaje si PDF</button>
-      </div>
-      <p class="small">Për PDF në telefon: shtyp “Ruaje si PDF”, pastaj zgjidh “Save as PDF” në menynë e printimit.</p>
-    </div>
-    <div class="hero-image reveal">
-      <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85"
-           alt="Kështjellë e vjetër në një peizazh malor"
-           onerror="this.src='https://images.unsplash.com/photo-152063783*
+  <header class="topbar"><div class="nav-wrap"><a class="brand" href="#home"><span>♜</span> Gjurmë Mesjetare</a><nav aria-label="Menyja kryesore"><a href="#timeline">Vija kohore</a><a href="#modern">Tranzicioni</a><a href="#arab">Arabët</a><a href="#rome">Perandoria Romake</a><a href="#england">Anglia</a><a href="#france">Franca</a><a href="#contacts">Kryqëzatat</a><a href="#ottoman">Osmanët</a><a href="#quiz">36 kuize</a><a href="#cards">Kartela</a><a href="#glossary">Fjalori</a><a href="#sources">Burimet/QR</a></nav></div></header>
+  <header class="hero" id="home"><div class="reveal"><div class="eyebrow">Histori · Qytetërime · Mesjetë</div><h1>Udhëto nëpër <span>Mesjetë</span></h1><p>Një udhëzues mësimor interaktiv për qytetërimet, perandoritë dhe monarkitë që formësuan historinë. Lexo informacionin, mëso termat, provo 36 pyetje dhe përgatitu me kartela studimi.</p><div class="actions"><a class="btn" href="#timeline">Fillo udhëtimin</a><button class="btn gold" onclick="window.print()" type="button">Shkarko / Printo si PDF</button></div><p class="small">Në telefon: zgjidh Printo dhe pastaj “Save as PDF”. Përmbajtja e shënimeve, kuizeve dhe fjalorit përfshihet në versionin e printuar.</p></div><div class="hero-image reveal"><img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85" alt="Kështjellë mesjetare në peizazh malor"><span class="caption">Kështjella dhe qytetet e Mesjetës</span></div></header>
+  <main>
+    <section id="timeline"><div class="section-head reveal"><div class="eyebrow">Ngjarjet kryesore</div><h2>Vija kohore interaktive</h2><p>Shtyp një datë për të kaluar te tema përkatëse.</p></div><div class="timeline"><a class="timeline-item reveal" href="#arab"><strong>622</strong><p>Hixhra: shpërngulja nga Meka në Medinë.</p></a><a class="timeline-item reveal" href="#rome"><strong>800</strong><p>Karli i Madh kurorëzohet perandor.</p></a><a class="timeline-item reveal" href="#england"><strong>1066</strong><p>Pushtimi norman i Anglisë.</p></a><a class="timeline-item reveal" href="#england"><strong>1215</strong><p>Magna Carta pranohet nga mbreti Xhoni.</p></a><a class="timeline-item reveal" href="#ottoman"><strong>1299</strong><p>Themelimi tradicional i shtetit osman.</p></a><a class="timeline-item reveal" href="#ottoman"><strong>1453</strong><p>Mehmeti II pushton Kostandinopojën.</p></a></div></section>
+    <section id="modern"><div class="section-head reveal"><div class="eyebrow">Mesjeta e vonë</div><h2>Tranzicioni drejt qytetërimit modern</h2><p>Ndryshimet në prodhim, qytete e tregti ndihmuan në krijimin e shteteve më të organizuara.</p></div><div class="grid"><article class="card reveal"><span class="tag">Bujqësia</span><h3>Prodhim dhe popullsi</h3><p>Veglat e p��rmirësuara dhe metodat e reja bujqësore rritën prodhimin, krijuan teprica ushqimore dhe mbështetën shtimin e popullsisë.</p></article><article class="card reveal"><span class="tag">Qytetet</span><h3>Esnafet dhe tregtia</h3><p>Qytetet u ringjallën pranë kështjellave e rrugëve tregtare. Zejtarët dhe tregtarët u organizuan në esnafe ose gilde, të cilat mbronin interesat e anëtarëve.</p></article><article class="card reveal"><span class="tag">Shoqëria</span><h3>Borgjezia dhe paraja</h3><p>Tregtarët dhe zejtarët e pasur, borgjezia, fituan ndikim. Tregtia në distanca të largëta nxiti paranë, kredinë dhe huadhënien.</p></article><article class="card reveal"><span class="tag">Shteti</span><h3>Forcimi i mbretërive</h3><p>Taksa në para, administrata e përbashkët dhe ushtritë e paguara i ndihmuan mbretërit të kufizonin fuqinë e feudalëve dhe të bashkonin territoret.</p></article></div></section>
+    <section id="arab"><div class="section-head reveal"><div class="eyebrow">Tema 1</div><h2>Qytetërimi Arab dhe Kalifatet</h2><p>Jeta në Gadishullin Arabik, lindja e Islamit dhe zhvillimi i shkencës e kulturës.</p></div><div class="grid"><article class="card reveal"><img class="photo" src="https://images.unsplash.com/photo-1509316785289-025f5b846b35?auto=format&fit=crop&w=900&q=80" alt="Shkretëtirë dhe duna"><span class="tag">Mjedisi dhe jeta</span><h3>Beduinët dhe oazet</h3><p>Gadishulli Arabik dominohej nga shkretëtira. Beduinët ishin nomadë që lëviznin me karvanë, shpesh me deve, dhe përdornin oazet për ujë, bujqësi dhe tregti.</p></article><article class="card reveal"><span class="tag">Feja</span><h3>Lindja e Islamit</h3><p>Islami u përhap nga Profeti Muhamed (rreth 570–632). Pesë shtyllat përfshijnë dëshminë e besimit në një Zot, faljen, dhënien për të varfrit, agjërimin e Ramazanit dhe pelegrinazhin në Mekë për ata që mund ta kryejnë. Hixhra e vitit 622 shënon fillimin e kalendarit islam.</p></article><article class="card reveal"><span class="tag">Kalifatet</span><h3>Udhëheqja dhe ndarjet</h3><p>Pas vdekjes së Muhamedit u zhvillua kalifati. Mosmarrëveshjet historike për udhëheqjen e bashkësisë myslimane lidhen me formimin e traditave sunite dhe shiite.</p></article><article class="card reveal"><span class="tag">Shkenca dhe kultura</span><h3>Njohuri që udhëtuan</h3><p>Dijetarët përkthyen dhe studiuan vepra antike, përfshirë ato të Aristotelit. U zhvilluan matematika, astronomia, mjekësia, gjeometria, arkitektura dhe letërsia. Sistemi dhjetor dhe përdorimi i zeros u përhapën gjerësisht përmes dijetarëve dhe kontakteve kulturore.</p></article></div></section>
+    <section id="rome"><div class="section-head reveal"><div class="eyebrow">Tema 2</div><h2>Perandoria e Shenjtë Romake</h2><p>Karli i Madh, administrimi i territoreve dhe kurorëzimi i Otonit I.</p></div><div class="grid"><article class="card reveal"><span class="tag">800</span><h3>Karli i Madh</h3><p>Karli i Madh, mbret i frankëve nga viti 768, zgjeroi dhe bashkoi territore të mëdha në Europën Perëndimore. Papa Leoni III e kurorëzoi perandor në vitin 800. Ai mbështeti shkollimin dhe administrimin e perandorisë.</p></article><article class="card reveal"><span class="tag">Feudalizmi</span><h3>Kontetë, vasalët dhe bujkrobërit</h3><p>Territoret administroheshin përmes njësive lokale si kontetë e dukatet. Pas vdekjes së Karlit, pushteti qendror u dobësua. Vasalët shërbenin ndaj zotërinjve në këmbim të tokës ose të drejtave; bujkrobërit punonin tokën.</p></article><article class="card reveal"><span class="tag">962</span><h3>Otoni I</h3><p>Otoni I u kurorëzua perandor nga Papa në vitin 962. Perandoria e Shenjtë Romake nën sundimtarët gjermanë mbeti një bashkim i decentralizuar i territoreve.</p></article><article class="card reveal"><span class="tag">Kujtesë</span><h3>Dy periudha të lidhura</h3><p>Karli i Madh u kurorëzua më 800; Otoni I më 962. Janë ngjarje të lidhura, por i përkasin fazave të ndryshme historike.</p></article></div></section>
+    <section id="england"><div class="section-head reveal"><div class="eyebrow">Tema 3</div><h2>Monarkia Angleze</h2><p>Ligji, Magna Carta dhe zhvillimi gradual i Parlamentit.</p></div><div class="grid"><article class="card reveal"><span class="tag">1066</span><h3>Pushtimi Norman</h3><p>Uilliam Pushtuesi pushtoi Anglinë, forcoi administrimin mbretëror dhe bëri regjistrime të pronave e burimeve, të dobishme për administrimin dhe taksat.</p></article><article class="card reveal"><span class="tag">Drejtësia</span><h3>Common Law</h3><p>Nën Henri II u forcua sistemi i përbashkët gjyqësor mbretëror dhe përdorimi i jurive. Kjo traditë u bë pjesë e Common Law, së drejtës zakonore dhe gjyqësore angleze.</p></article><article class="card reveal"><span class="tag">1215</span><h3>Magna Carta</h3><p>Nën presionin e baronëve, mbreti Xhoni pranoi Kartën e Madhe të Lirive. Ajo u bë simbol i parimit se edhe mbreti duhet t’i nënshtrohet ligjit; ndikimi kushtetues i saj u zhvillua me kalimin e shekujve.</p></article><article class="card reveal"><span class="tag">1295</span><h3>Parlamenti</h3><p>Eduardi I thirri përfaqësues të klerit, fisnikërisë, kalorësve dhe qyteteve. Më vonë Parlamenti u zhvillua në Dhomën e Lordëve dhe Dhomën e Komunave, duke marrë rol në qeverisje dhe taksa.</p></article></div></section>
+    <section id="france"><div class="section-head reveal"><div class="eyebrow">Tema 4</div><h2>Monarkia Franceze</h2><p>Qendërzimi mbretëror, Përfaqësia e Përgjithshme dhe Lufta Njëqindvjeçare.</p></div><div class="grid"><article class="card reveal"><span class="tag">Qendërzimi</span><h3>Forcimi i kurorës</h3><p>Mbretër si Filipi II August zgjeruan ndikimin mbretëror dhe kufizuan disa zotërime feudale. Këshilli i Kurorës dhe institucionet mbretërore ndihmonin administrimin e drejtësinë.</p></article><article class="card reveal"><span class="tag">1302</span><h3>Përfaqësia e Përgjithshme</h3><p>Filipi IV thirri përfaqësues të klerit, fisnikërisë dhe shtresave qytetare. Organi nuk u zhvillua si parlament i përhershëm me pushtet të barabartë me mbretin dhe mblidhej kur e thërriste ai.</p></article><article class="card reveal"><span class="tag">1337–1453</span><h3>Lufta Njëqindvjeçare</h3><p>Konflikti i gjatë mes Anglisë dhe Francës nxiti bashkimin politik francez. Zhan d'Ark frymëzoi francezët gjatë fushatës së Orleanit më 1429; lufta përfundoi më 1453.</p></article><article class="card reveal"><span class="tag">Rezultati</span><h3>Drejt monarkisë absolute</h3><p>Pas luftërave dhe zgjerimit të administratës, kurora franceze u forcua. Në periudha të mëvonshme Franca u zhvillua drejt monarkisë absolute.</p></article></div></section>
+    <section id="compare"><div class="section-head reveal"><div class="eyebrow">Krahasim</div><h2>Anglia dhe Franca</h2><p>Dy rrugë të ndryshme në zhvillimin e monarkive mesjetare.</p></div><div class="compare reveal"><table><thead><tr><th>Aspekti</th><th>Anglia</th><th>Franca</th></tr></thead><tbody><tr><td>Institucionet</td><td>Magna Carta (1215) dhe Parlament i zhvilluar gradualisht.</td><td>Përfaqësia e Përgjithshme (1302), e thirrur nga mbreti.</td></tr><tr><td>Prirja</td><td>Ligji dhe Parlamenti kufizuan gradualisht pushtetin mbretëror.</td><td>Autoriteti i kurorës u përqendrua gjithnjë e më shumë.</td></tr><tr><td>Zhvillimi afatgjatë</td><td>Monarki parlamentare.</td><td>Monarki absolute në periudha të mëvonshme.</td></tr></tbody></table></div></section>
+    <section id="contacts"><div class="section-head reveal"><div class="eyebrow">Tema 5</div><h2>Marrëdhëniet dhe Kryqëzatat</h2><p>Kontakte e shkëmbime, përkrah konflikteve ushtarake, mes Lindjes dhe Perëndimit.</p></div><div class="grid"><article class="card reveal"><span class="tag">711 dhe Iberia</span><h3>Kordova dhe dijet</h3><p>Në vitin 711 forcat myslimane arritën në Gadishullin Iberik. Kordova u bë qendër e rëndësishme kulturore. Përkthimet dhe shkëmbimet ndihmuan në përcjelljen e filozofisë antike, përfshirë veprat e Aristotelit.</p></article><article class="card reveal"><span class="tag">1096–1204</span><h3>Kryqëzatat</h3><p>Ekspedita ushtarake të organizuara nga autoritete të krishtera perëndimore drejt Tokës së Shenjtë. Motivet përfshinin fenë, politikën, tregtinë dhe tokën. Seladini, sulltani i Egjiptit dhe Sirisë, u bë një udhëheqës i njohur.</p></article><article class="card reveal"><span class="tag">Tregtia</span><h3>Mallra dhe ide</h3><p>Kontaktet nxitën tregtinë e mëndafshit, pambukut, parfumeve, orizit dhe sheqerit, si dhe shkëmbimin e njohurive e teknikave.</p></article><article class="card reveal"><span class="tag">Ndikimi</span><h3>Histori kontakti</h3><p>Marrëdhëniet përfshinin luftë, diplomaci, tregti dhe bashkëpunim intelektual; nuk ishin vetëm përplasje fetare.</p></article></div></section>
+    <section id="ottoman"><div class="section-head reveal"><div class="eyebrow">Tema 6</div><h2>Perandoria Osmane</h2><p>Themelimi, zgjerimi, administrimi dhe ushtria osmane.</p></div><div class="grid"><article class="card reveal"><span class="tag">Rreth vitit 1299</span><h3>Themelimi dhe zgjerimi</h3><p>Shteti osman u formua rreth emiratisë së Osmanit I në Anadoll dhe u zgjerua më pas në Ballkan e rajone të tjera. Shqiptarët, nën Gjergj Kastriotin Skënderbeun, bënë rezistencë të gjatë në shekullin XV.</p></article><article class="card reveal"><span class="tag">1453</span><h3>Kostandinopoja</h3><p>Sulltan Mehmeti II pushtoi Kostandinopojën. Qyteti u bë kryeqyteti osman dhe njihet sot si Stamboll. Perandoria u shtri në territore të tri kontinenteve.</p></article><article class="card reveal"><span class="tag">Qeverisja</span><h3>Sulltani dhe vezirët</h3><p>Sulltani ishte në krye të shtetit. Këshilli Perandorak dhe vezirët ndihmonin administrimin. Ligjet përfshinin Sheriatin dhe kanunametë e sulltanëve.</p></article><article class="card reveal"><span class="tag">Ushtria dhe ekonomia</span><h3>Timari, sipahinjtë dhe jeniçerët</h3><p>Sipahinjtë merrnin të ardhura nga timari në këmbim të shërbimit ushtarak. Jeniçerët ishin trupa elitare. Esnafet organizonin zejtarët dhe tregtarët në qytete.</p></article></div></section>
+    <section id="quiz"><div class="section-head reveal"><div class="eyebrow">Provo njohuritë</div><h2>36 pyetje interaktive</h2><p>Ka 12 pyetje me alternativa, 12 të vërtetë/e gabuar dhe 12 me përgjigje të shkurtër. Përgjigjet kontrollohen menjëherë dhe rezultati llogaritet.</p></div><div class="quiz-tools"><label for="filterQuiz" class="small">Filtro llojin:</label><select id="filterQuiz"><option value="all">Të gjitha pyetjet</option><option value="choice">Me alternativa</option><option value="tf">E vërtetë / e gabuar</option><option value="text">Përgjigje e shkurtër</option></select><span class="small" id="questionCount">36 pyetje</span></div><div id="score" class="score" aria-live="polite">Përgjigje të sakta: 0 / 0</div><div id="quizList"></div><div class="quiz-actions"><button type="button" id="checkAll">Kontrollo të gjitha</button><button type="button" id="resetQuiz" class="reset">Fillo përsëri</button></div></section>
+    <section id="cards"><div class="section-head reveal"><div class="eyebrow">Mëso aktivisht</div><h2>Kartela studimi</h2><p>Shtyp kartelën për të parë shpjegimin. Përdor shigjetat për të kaluar te termi tjetër.</p></div><div class="flash-area"><div></div><div id="flashcard" class="flashcard" role="button" tabindex="0" aria-live="polite"><div><span class="tag" id="flashLabel">Termi</span><h3 id="flashTerm">Vasal</h3><p id="flashMeaning">Shtyp kartelën për të zbuluar përkufizimin.</p></div></div><div></div></div><div class="flash-controls"><button id="prevCard" type="button">← Mbrapa</button><button id="flipCard" type="button">Kthe kartelën</button><button id="nextCard" type="button">Tjetra →</button></div><p id="flashCount" class="small" style="text-align:center"></p></section>
+    <section id="glossary"><div class="section-head reveal"><div class="eyebrow">Fjalor digjital</div><h2>Termat kryesorë</h2><p>Shpjegime të qarta për fjalët e përdorura në temat e faqes.</p></div><div class="glossary-grid"><div class="glossary-item reveal"><dt>Beduinë</dt><dd>Nomadë të Gadishullit Arabik, të lidhur me jetën në shkretëtirë dhe karvanët.</dd></div><div class="glossary-item reveal"><dt>Vasal</dt><dd>Fisnik që merrte tokë ose të drejta nga zotëria në këmbim të besnikërisë dhe shërbimit.</dd></div><div class="glossary-item reveal"><dt>Common Law</dt><dd>Traditë e së drejtës angleze e zhvilluar nga zakonet dhe vendimet e gjykatave.</dd></div><div class="glossary-item reveal"><dt>Sheriat</dt><dd>Traditë ligjore islame e mbështetur në burime fetare dhe interpretime juridike.</dd></div><div class="glossary-item reveal"><dt>Jeniçerë</dt><dd>Trupa elitare të këmbësorisë në ushtrinë osmane.</dd></div><div class="glossary-item reveal"><dt>Esnaf / Gilde</dt><dd>Organizim zejtarësh ose tregtarësh që mbronte interesat e anëtarëve.</dd></div><div class="glossary-item reveal"><dt>Borgjezi</dt><dd>Shtresë qytetare, kryesisht tregtarë e zejtarë të pasur.</dd></div><div class="glossary-item reveal"><dt>Ekonomi monetare</dt><dd>Ekonomi ku paraja përdoret për tregti, taksa, pagesa dhe kredi.</dd></div><div class="glossary-item reveal"><dt>Monarki absolute</dt><dd>Qeverisje ku pushteti përqendrohet kryesisht te monarku.</dd></div><div class="glossary-item reveal"><dt>Monarki parlamentare</dt><dd>Monarki ku pushteti i sundimtarit kufizohet nga ligji dhe parlamenti.</dd></div><div class="glossary-item reveal"><dt>Komb-shtet</dt><dd>Shtet me territor dhe institucione qendrore të përbashkëta.</dd></div><div class="glossary-item reveal"><dt>Tatim në para</dt><dd>Pagesë e detyrueshme ndaj autoritetit, e mbledhur në monedhë.</dd></div><div class="glossary-item reveal"><dt>Kalif</dt><dd>Udhëheqës i bashkësisë myslimane në traditën e kalifatit.</dd></div><div class="glossary-item reveal"><dt>Timar</dt><dd>Sistem osman ku të ardhurat nga territori jepeshin në këmbim të detyrimeve, shpesh ushtarake.</dd></div><div class="glossary-item reveal"><dt>Bujkrob</dt><dd>Fshatar i lidhur me tokën e zotërisë feudale dhe i detyruar ta punonte atë.</dd></div><div class="glossary-item reveal"><dt>Magna Carta</dt><dd>Karta e Madhe e Lirive, e pranuar nga mbreti Xhoni në vitin 1215.</dd></div><div class="glossary-item reveal"><dt>Kalifat</dt><dd>Shtet ose institucion i udhëheqjes së bashkësisë myslimane nga kalifi.</dd></div><div class="glossary-item reveal"><dt>Juri</dt><dd>Grup qytetarësh që shqyrton fakte në një proces gjyqësor.</dd></div></div></section>
+    <section id="sources"><div class="section-head reveal"><div class="eyebrow">Referenca dhe ndarje</div><h2>Burimet & QR code</h2><p>Plotëso referencën e saktë të librit. QR code lidhet me adresën publike të faqes.</p></div><div class="qr-layout"><div class="source reveal"><p><strong>Libri shkollor:</strong> [Titulli i librit të historisë]</p><p><strong>Autorët:</strong> [Emrat e autorëve]</p><p><strong>Botuesi dhe viti:</strong> [Botuesi, vendi dhe viti]</p><p><strong>Faqet e përdorura:</strong> [Numrat e faqeve]</p><p><strong>Shënim:</strong> Kontrollo datat dhe hollësitë me tekstin e librit shkollor dhe udhëzimet e mësuesit.</p></div><div class="qr-box reveal"><strong>Skano për ta hapur faqen</strong><img id="qrImage" alt="QR code që hap këtë faqe"><p id="qrText" class="small">Publikoje faqen që QR code të mund të përdoret nga të tjerët.</p></div></div><p class="note reveal">Për ta ndarë QR code me shokët, faqja duhet të publikohet në GitHub Pages ose një host tjetër. Imazhet dhe shërbimi QR kërkojnë internet.</p></section>
+  </main><footer>♜ Gjurmë Mesjetare · Projekt mësimor për qytetërimet dhe monarkitë mesjetare.</footer>
+  <script>
+    const questions = [
+      {type:'choice',topic:'Qytetërimi Arab',q:'Çfarë shënon viti 622?',options:['Kurorëzimin e Karlit të Madh','Hixhrën nga Meka në Medinë','Pushtimin norman të Anglisë'],answer:1},
+      {type:'choice',topic:'Qytetërimi Arab',q:'Cilët ishin beduinët?',options:['Nomadë të shkretëtirës','Murgj europianë','Ushtarë osmanë'],answer:0},
+      {type:'choice',topic:'Qytetërimi Arab',q:'Cili qytet ishte destinacioni i pelegrinazhit islam?',options:['Roma','Meka','Parisi'],answer:1},
+      {type:'choice',topic:'Perandoria e Shenjtë Romake',q:'Kush u kurorëzua perandor në vitin 800?',options:['Karli i Madh','Otoni I','Henri II'],answer:0},
+      {type:'choice',topic:'Perandoria e Shenjtë Romake',q:'Në cilin vit u kurorëzua Otoni I?',options:['800','962','1066'],answer:1},
+      {type:'choice',topic:'Monarkia Angleze',q:'Kush e pranoi Magna Carta-n në vitin 1215?',options:['Eduardi I','Mbreti Xhoni','Uilliam Pushtuesi'],answer:1},
+      {type:'choice',topic:'Monarkia Angleze',q:'Çfarë është Common Law?',options:['E drejta e përgjithshme zakonore dhe gjyqësore angleze','Një taksë feudale','Një urdhër ushtarak'],answer:0},
+      {type:'choice',topic:'Monarkia Franceze',q:'Kush frymëzoi francezët në fushatën e Orleanit më 1429?',options:['Zhan d’Ark','Eleonora e Akuitanisë','Kleopatra'],answer:0},
+      {type:'choice',topic:'Marrëdhëniet dhe Kryqëzatat',q:'Cili ishte një rezultat i kontakteve tregtare Lindje-Perëndim?',options:['Shkëmbimi i mallrave dhe njohurive','Mbyllja e të gjitha qyteteve','Zhdukja e tregtisë'],answer:0},
+      {type:'choice',topic:'Perandoria Osmane',q:'Kush pushtoi Kostandinopojën në vitin 1453?',options:['Osmani I','Mehmeti II','Skënderbeu'],answer:1},
+      {type:'choice',topic:'Perandoria Osmane',q:'Si quheshin trupat elitare osmane?',options:['Jeniçerë','Vasalë','Beduinë'],answer:0},
+      {type:'choice',topic:'Tranzicioni',q:'Cila shtresë qytetare u fuqizua nga tregtia dhe zejtaria?',options:['Borgjezia','Bujkrobëria','Kalifati'],answer:0},
+      {type:'tf',topic:'Qytetërimi Arab',q:'Hixhra e vitit 622 lidhet me shpërnguljen nga Meka në Medinë.',answer:true},
+      {type:'tf',topic:'Qytetërimi Arab',q:'Beduinët ishin kryesisht popullsi e vendosur në qytetet europiane.',answer:false},
+      {type:'tf',topic:'Qytetërimi Arab',q:'Dijetarët në botën islame përkthyen dhe studiuan vepra antike.',answer:true},
+      {type:'tf',topic:'Perandoria e Shenjtë Romake',q:'Karli i Madh u kurorëzua nga Papa Leoni III më 800.',answer:true},
+      {type:'tf',topic:'Perandoria e Shenjtë Romake',q:'Otoni I u kurorëzua perandor në vitin 962.',answer:true},
+      {type:'tf',topic:'Monarkia Angleze',q:'Magna Carta u pranua nga mbreti Xhoni më 1215.',answer:true},
+      {type:'tf',topic:'Monarkia Angleze',q:'Parlamenti anglez u zhvillua me Dhom��n e Lordëve dhe Dhomën e Komunave.',answer:true},
+      {type:'tf',topic:'Monarkia Franceze',q:'Përfaqësia e Përgjithshme franceze ishte parlament i përhershëm me pushtet të barabartë me mbretin.',answer:false},
+      {type:'tf',topic:'Monarkia Franceze',q:'Lufta Njëqindvjeçare u zhvillua mes Anglisë dhe Francës.',answer:true},
+      {type:'tf',topic:'Marrëdhëniet dhe Kryqëzatat',q:'Kryqëzatat kishin vetëm motive fetare dhe asnjë interes politik apo ekonomik.',answer:false},
+      {type:'tf',topic:'Perandoria Osmane',q:'Mehmeti II pushtoi Kostandinopojën më 1453.',answer:true},
+      {type:'tf',topic:'Tranzicioni',q:'Përmirësimet bujqësore mund të rrisnin prodhimin dhe popullsinë.',answer:true},
+      {type:'text',topic:'Qytetërimi Arab',q:'Si quhet shpërngulja e Muhamedit nga Meka në Medinë?',answers:['hixhra']},
+      {type:'text',topic:'Qytetërimi Arab',q:'Si quheshin nomadët e shkretëtirës arabe?',answers:['beduine','beduin']},
+      {type:'text',topic:'Perandoria e Shenjtë Romake',q:'Cili perandor u kurorëzua në vitin 800?',answers:['karli i madh','charlemagne']},
+      {type:'text',topic:'Perandoria e Shenjtë Romake',q:'Kush u kurorëzua perandor në vitin 962?',answers:['otoni i','otto i','oton i']},
+      {type:'text',topic:'Monarkia Angleze',q:'Si quhet dokumenti i pranuar në Angli më 1215?',answers:['magna carta','karta e madhe e lirive']},
+      {type:'text',topic:'Monarkia Angleze',q:'Si quhet e drejta zakonore dhe gjyqësore angleze?',answers:['common law']},
+      {type:'text',topic:'Monarkia Franceze',q:'Si quhej heroina e lidhur me Orleanin në vitin 1429?',answers:['zhan d ark','joan of arc','zhana d ark']},
+      {type:'text',topic:'Marrëdhëniet dhe Kryqëzatat',q:'Cili udhëheqës mysliman u dallua gjatë kryqëzatave?',answers:['seladini','saladin']},
+      {type:'text',topic:'Perandoria Osmane',q:'Cili sulltan pushtoi Kostandinopojën më 1453?',answers:['mehmeti ii','mehmet ii','mehmeti 2']},
+      {type:'text',topic:'Perandoria Osmane',q:'Si quhej sistemi osman i dhënies së të ardhurave nga toka në këmbim të shërbimit?',answers:['timar','sistemi timar']},
+      {type:'text',topic:'Tranzicioni',q:'Si quhej shtresa e tregtarëve dhe zejtarëve të pasur të qyteteve?',answers:['borgjezia','borgjezi']},
+      {type:'text',topic:'Tranzicioni',q:'Si quheshin organizatat e zejtarëve dhe tregtarëve?',answers:['esnaf','esnafet','gilde','esnafe']}
+    ];
+    const quizList=document.getElementById('quizList');
+    const filterQuiz=document.getElementById('filterQuiz');
+    const scoreEl=document.getElementById('score');
+    const normalize=s=>s.toLocaleLowerCase('sq').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[’']/g,' ').replace(/[^a-z0-9 ]/g,' ').replace(/\s+/g,' ').trim();
+    function renderQuestions(){
+      quizList.innerHTML='';
+      const filter=filterQuiz.value;
+      const shown=questions.map((q,index)=>({...q,index})).filter(q=>filter==='all'||q.type===filter);
+      document.getElementById('questionCount').textContent=shown.length+' pyetje';
+      shown.forEach(item=>{
+        const box=document.createElement('article');box.className='quiz';box.dataset.index=item.index;
+        const typeLabel=item.type==='choice'?'Me alternativa':item.type==='tf'?'E vërtetë / e gabuar':'Përgjigje e shkurtër';
+        let answerHtml='';
+        if(item.type==='choice') answerHtml=item.options.map((op,i)=>`<label><input type="radio" name="q${item.index}" value="${i}"> ${op}</label>`).join('');
+        if(item.type==='tf') answerHtml=`<label><input type="radio" name="q${item.index}" value="true"> E vërtetë</label><label><input type="radio" name="q${item.index}" value="false"> E gabuar</label>`;
+        if(item.type==='text') answerHtml='<input class="short-answer" type="text" placeholder="Shkruaj përgjigjen këtu" aria-label="Përgjigjja jote">';
+        box.innerHTML=`<div class="quiz-top"><h3>${item.index+1}. ${item.q}</h3><span class="q-type">${typeLabel}</span></div><p class="small">${item.topic}</p>${answerHtml}<p class="answer-feedback" aria-live="polite"></p>`;
+        quizList.appendChild(box);
+      });
+      updateScore();
+    }
+    function checkQuestion(box){
+      const index=Number(box.dataset.index),q=questions[index];let correct=false,answered=false;
+      if(q.type==='choice'||q.type==='tf'){
+        const selected=box.querySelector('input[type="radio"]:checked');
+        if(selected){answered=true;correct=q.type==='choice'?Number(selected.value)===q.answer:selected.value===String(q.answer)}
+      }else{
+        const input=box.querySelector('.short-answer');const val=normalize(input.value);answered=val.length>0;
+        correct=answered&&q.answers.some(a=>val===normalize(a)||val.includes(normalize(a)));
+      }
+      const feedback=box.querySelector('.answer-feedback');
+      if(!answered){feedback.textContent='Zgjidh ose shkruaj një përgjigje për ta kontrolluar.';feedback.className='answer-feedback no';return null}
+      if(correct){feedback.textContent='Saktë!';feedback.className='answer-feedback ok';box.dataset.correct='true'}
+      else{
+        let solution=q.type==='choice'?q.options[q.answer]:q.type==='tf'?(q.answer?'E vërtetë':'E gabuar'):q.answers[0];
+        feedback.textContent='Përgjigjja e saktë: '+solution;feedback.className='answer-feedback no';box.dataset.correct='false';
+      }
+      updateScore();return correct;
+    }
+    function updateScore(){const boxes=[...quizList.querySelectorAll('.quiz[data-index]')];const checked=boxes.filter(b=>b.dataset.correct==='true'||b.dataset.correct==='false');const right=boxes.filter(b=>b.dataset.correct==='true').length;scoreEl.textContent=`Përgjigje të sakta: ${right} / ${checked.length} të kontrolluara · ${questions.length} pyetje gjithsej`;}
+    quizList.addEventListener('change',e=>{const box=e.target.closest('.quiz[data-index]');if(box)checkQuestion(box)});
+    quizList.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.classList.contains('short-answer')){e.preventDefault();checkQuestion(e.target.closest('.quiz[data-index]'))}});
+    document.getElementById('checkAll').addEventListener('click',()=>{quizList.querySelectorAll('.quiz[data-index]').forEach(checkQuestion);updateScore()});
+    document.getElementById('resetQuiz').addEventListener('click',()=>{renderQuestions();window.scrollTo({top:document.getElementById('quiz').offsetTop-75,behavior:'smooth'})});
+    filterQuiz.addEventListener('change',renderQuestions);renderQuestions();
+    const flashcards=[['Beduinë','Nomadë të Gadishullit Arabik që lëviznin në shkretëtirë.'],['Vasal','Fisnik që shërbente ndaj zotërisë në këmbim të tokës ose të drejtave.'],['Common Law','Tradita e së drejtës së përgjithshme angleze.'],['Magna Carta','Karta e Madhe e Lirive, e pranuar nga mbreti Xhoni më 1215.'],['Borgjezi','Shtresa e tregtarëve dhe zejtarëve të pasur të qyteteve.'],['Jeniçerë','Trupa elitare të ushtrisë osmane.'],['Timar','Sistem osman i të ardhurave nga toka kundrejt shërbimit.'],['Hixhra','Shpërngulja e Muhamedit nga Meka në Medinë në vitin 622.'],['Monarki parlamentare','Monarki ku pushteti kufizohet nga ligji dhe parlamenti.'],['Monarki absolute','Monarki ku pushteti përqendrohet kryesisht te sundimtari.']];
+    let cardIndex=0,flipped=false;const flashcard=document.getElementById('flashcard');
+    function showCard(){document.getElementById('flashTerm').textContent=flashcards[cardIndex][0];document.getElementById('flashLabel').textContent=flipped?'Përkufizimi':'Termi';document.getElementById('flashMeaning').textContent=flipped?flashcards[cardIndex][1]:'Shtyp kartelën ose “Kthe kartelën” për të parë shpjegimin.';document.getElementById('flashCount').textContent=`Kartela ${cardIndex+1} nga ${flashcards.length}`}
+    function flip(){flipped=!flipped;showCard()}flashcard.addEventListener('click',flip);flashcard.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();flip()}});document.getElementById('flipCard').addEventListener('click',flip);document.getElementById('prevCard').addEventListener('click',()=>{cardIndex=(cardIndex-1+flashcards.length)%flashcards.length;flipped=false;showCard()});document.getElementById('nextCard').addEventListener('click',()=>{cardIndex=(cardIndex+1)%flashcards.length;flipped=false;showCard()});showCard();
+    const qr=document.getElementById('qrImage'),qrText=document.getElementById('qrText');
+    if(location.protocol==='https:'||location.protocol==='http:'){qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(location.href);qrText.textContent='Skano kodin për të hapur këtë faqe.'}
+    else{qr.src='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent('Publiko faqen online për të krijuar QR code');qrText.textContent='Pas publikimit të faqes, QR code do të dërgojë te adresa publike.'}
+    const reveals=document.querySelectorAll('.reveal');if('IntersectionObserver'in window){const obs=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}}),{threshold:.08});reveals.forEach(el=>obs.observe(el))}else reveals.forEach(el=>el.classList.add('visible'));
+  </script>
+</body>
+</html>
