@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="sq">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Udhëtim nëpër qytetërimet dhe monarkitë e Mesjetës.">
+  <title>Gjurmë Mesjetare | Historia në udhëtim</title>
+
+  <style>
+    :root {
+      --paper: #fbf5e8;
+      --paper-deep: #f0e2c6;
+      --ink: #30251d;
+      --muted: #6f6256;
+      --red: #8e3f31;
+      --red-dark: #6f2e25;
+      --gold: #bd8c3d;
+      --green: #526d50;
+      --line: #dfcfad;
+      --white: #fffdf8;
+      --shadow: 0 12px 30px rgba(76, 52, 27, .12);
+    }
+
+    * { box-sizing: border-box; scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(ellipse at 10% 12%, rgba(189,140,61,.10), transparent 28rem),
+        radial-gradient(ellipse at 90% 30%, rgba(142,63,49,.07), transparent 30rem),
+        var(--paper);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.7;
+    }
+
+    img { max-width: 100%; }
+    button, input { font: inherit; }
+    a { color: var(--red-dark); }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(251,245,232,.96);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-wrap {
+      max-width: 1200px;
+      margin: auto;
+      padding: .7rem 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .8rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      color: var(--red-dark);
+      font-size: 1.05rem;
+      font-weight: bold;
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .brand-icon { font-size: 1.5rem; }
+
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: .1rem;
+    }
+
+    nav a {
+      color: var(--muted);
+      padding: .4rem .55rem;
+      border-radius: 999px;
+      text-decoration: none;
+      font: 600 .78rem Arial, sans-serif;
+    }
+
+    nav a:hover, nav a:focus {
+      color: var(--red-dark);
+      background: var(--paper-deep);
+    }
+
+    .hero {
+      max-width: 1200px;
+      min-height: 520px;
+      margin: auto;
+      padding: 4.5rem 1rem 3.5rem;
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .eyebrow {
+      color: var(--red);
+      font: bold .76rem Arial, sans-serif;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    h1, h2, h3 { line-height: 1.2; }
+    h1 {
+      max-width: 700px;
+      margin: .7rem 0 1rem;
+      font-size: clamp(2.7rem, 7vw, 5.3rem);
+    }
+
+    h1 span { color: var(--red); }
+    .hero p { max-width: 650px; color: var(--muted); font-size: 1.1rem; }
+
+    .hero-image {
+      position: relative;
+      overflow: hidden;
+      min-height: 330px;
+      border: 8px solid var(--white);
+      outline: 1px solid var(--line);
+      border-radius: 48% 48% 14px 14px;
+      box-shadow: var(--shadow);
+      animation: float 5s ease-in-out infinite;
+    }
+
+    .hero-image img {
+      width: 100%;
+      height: 100%;
+      min-height: 330px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .image-caption {
+      position: absolute;
+      right: 12px;
+      bottom: 12px;
+      padding: .35rem .65rem;
+      border-radius: 4px;
+      color: white;
+      background: rgba(48,37,29,.78);
+      font-size: .78rem;
+    }
+
+    .hero-actions { display: flex; flex-wrap: wrap; gap: .7rem; margin-top: 1.4rem; }
+
+    .button {
+      display: inline-block;
+      padding: .68rem .95rem;
+      border: 1px solid var(--red);
+      border-radius: 5px;
+      background: var(--red);
+      color: white;
+      text-decoration: none;
+      font: bold .88rem Arial, sans-serif;
+      cursor: pointer;
+      transition: transform .2s, background .2s;
+    }
+
+    .button:hover { transform: translateY(-2px); background: var(--red-dark); }
+    .button.light { background: transparent; color: var(--red-dark); }
+    .button.gold { border-color: var(--gold); background: var(--gold); color: #241a10; }
+
+    main { max-width: 1200px; margin: auto; padding: 0 1rem 4rem; }
+    section { padding: 3.7rem 0 .4rem; scroll-margin-top: 85px; }
+
+    .section-head { max-width: 760px; margin-bottom: 1.5rem; }
+    .section-head h2 { margin: .4rem 0 .55rem; font-size: clamp(2rem, 4vw, 3rem); }
+    .section-head p { margin: 0; color: var(--muted); }
+
+    .grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; }
+
+    .card, .quiz, .glossary-item, .source-box, .timeline-card, .compare-wrap, .qr-box {
+      border: 1px solid var(--line);
+      border-radius: 9px;
+      background: rgba(255,253,248,.88);
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 1.25rem;
+      transition: transform .25s, box-shadow .25s;
+    }
+
+    .card:hover { transform: translateY(-4px); box-shadow: 0 16px 34px rgba(76,52,27,.16); }
+    .card h3 { margin: .1rem 0 .5rem; color: var(--red-dark); font-size: 1.25rem; }
+    .card p, .card li { color: var(--muted); }
+    .card p:last-child { margin-bottom: 0; }
+    .card ul { padding-left: 1.2rem; }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: .45rem;
+      color: var(--green);
+      font: bold .72rem Arial, sans-serif;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+
+    .section-image {
+      width: 100%;
+      height: 220px;
+      margin-bottom: .9rem;
+      border-radius: 6px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .note {
+      margin-top: 1rem;
+      padding: .9rem 1rem;
+      border-left: 4px solid var(--gold);
+      border-radius: 4px;
+      background: #f5ebd6;
+      color: var(--muted);
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .9rem;
+    }
+
+    .timeline-card { padding: 1rem; }
+    .timeline-card strong { display: block; color: var(--red); font-size: 1.25rem; }
+    .timeline-card p { margin: .3rem 0 0; color: var(--muted); }
+
+    .quiz { margin-top: 1.1rem; padding: 1.2rem; }
+    .quiz h3 { margin: 0 0 .6rem; color: var(--red-dark); }
+    .question { padding: .7rem 0; border-top: 1px solid var(--line); }
+    .question:first-of-type { border-top: 0; }
+    .question p { margin: .1rem 0 .5rem; font-weight: bold; }
+    .question label { display: block; padding: .25rem .25rem; color: var(--muted); cursor: pointer; }
+    .question label:hover { color: var(--red-dark); }
+    .question input { accent-color: var(--red); margin-right: .4rem; }
+    .quiz button {
+      margin-top: .65rem;
+      padding: .6rem .9rem;
+      border: 0;
+      border-radius: 5px;
+      background: var(--green);
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .quiz button:hover { filter: brightness(.92); }
+    .feedback { min-height: 1.5rem; margin: .6rem 0 0; font-weight: bold; }
+    .feedback.success { color: #356442; }
+    .feedback.error { color: #a53d2b; }
+
+    .compare-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; min-width: 590px; }
+    th, td { padding: .9rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line); }
+    th { color: var(--red-dark); background: #f5ebd6; }
+    td { color: var(--muted); }
+    tr:last-child td { border-bottom: 0; }
+
+    .glossary-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: .8rem; }
+    .glossary-item { padding: .9rem; }
+    .glossary-item dt { color: var(--red-dark); font-weight: bold; }
+    .glossary-item dd { margin: .2rem 0 0; color: var(--muted); }
+
+    .qr-layout { display: grid; grid-template-columns: 1fr 240px; gap: 1rem; align-items: center; }
+    .qr-box { padding: 1rem; text-align: center; }
+    #qrImage { width: 180px; height: 180px; display: block; margin: .4rem auto; }
+    .small { color: var(--muted); font-size: .9rem; }
+    .source-box { padding: 1.2rem; }
+    .source-box p { color: var(--muted); margin: .35rem 0; }
+    .source-box strong { color: var(--red-dark); }
+
+    footer {
+      padding: 1.5rem 1rem;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .reveal { opacity: 0; transform: translateY(18px); transition: opacity .65s ease, transform .65s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @media (max-width: 850px) {
+      .nav-wrap { align-items: flex-start; flex-direction: column; }
+      nav { justify-content: flex-start; }
+      .hero { grid-template-columns: 1fr; padding-top: 3rem; }
+      .hero-image { max-width: 600px; width: 100%; margin: auto; }
+      .timeline { grid-template-columns: repeat(2,1fr); }
+      .glossary-grid { grid-template-columns: repeat(2,1fr); }
+    }
+
+    @media (max-width: 560px) {
+      nav a { padding: .35rem .42rem; font-size: .72rem; }
+      .grid, .timeline, .glossary-grid, .qr-layout { grid-template-columns: 1fr; }
+      .hero-image { min-height: 250px; }
+      .hero-image img { min-height: 250px; }
+      section { padding-top: 2.8rem; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        scroll-behavior: auto !important;
+        animation-duration: .01ms !important;
+        transition-duration: .01ms !important;
+      }
+    }
+
+    @media print {
+      body { background: white; color: #222; font-size: 11pt; }
+      .topbar, .hero-actions, .quiz button, .feedback, .qr-box, footer { display: none !important; }
+      .hero { min-height: auto; padding: 1rem 0; display: block; }
+      .hero-image { display: none; }
+      main { max-width: none; padding: 0; }
+      section { padding: 1rem 0; break-inside: avoid; }
+      .card, .quiz, .glossary-item, .source-box, .timeline-card, .compare-wrap {
+        box-shadow: none;
+        background: white;
+        break-inside: avoid;
+      }
+      .grid { gap: .5rem; }
+      .section-image { height: 130px; }
+      a { color: #222; text-decoration: none; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="topbar">
+    <div class="nav-wrap">
+      <a class="brand" href="#kryefaqja"><span class="brand-icon">♜</span> Gjurmë Mesjetare</a>
+      <nav aria-label="Menyja kryesore">
+        <a href="#vija-kohore">Kohorja</a>
+        <a href="#tranzicioni">Tranzicioni</a>
+        <a href="#arab">Arabët</a>
+        <a href="#romake">Perandoria Romake</a>
+        <a href="#angli">Anglia</a>
+        <a href="#france">Franca</a>
+        <a href="#kryqezatat">Kryqëzatat</a>
+        <a href="#osmane">Osmanët</a>
+        <a href="#fjalori">Fjalori</a>
+        <a href="#burimet">Burimet</a>
+      </nav>
+    </div>
+  </header>
+
+  <header class="hero" id="kryefaqja">
+    <div class="reveal">
+      <div class="eyebrow">Histori · Qytetërime · Mesjetë</div>
+      <h1>Udhëto nëpër <span>Mesjetë</span></h1>
+      <p>
+        Zbulo qytetërimet dhe monarkitë që formësuan historinë. Lexo temat,
+        ndiq vijën kohore, provo kuizet dhe përdore faqen si shënime mësimore.
+      </p>
+      <div class="hero-actions">
+        <a class="button" href="#vija-kohore">Fillo udhëtimin</a>
+        <button class="button gold" type="button" onclick="window.print()">Ruaje si PDF</button>
+      </div>
+      <p class="small">Për PDF në telefon: shtyp “Ruaje si PDF”, pastaj zgjidh “Save as PDF” në menynë e printimit.</p>
+    </div>
+    <div class="hero-image reveal">
+      <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=1200&q=85"
+           alt="Kështjellë e vjetër në një peizazh malor"
+           onerror="this.src='https://images.unsplash.com/photo-152063783*
